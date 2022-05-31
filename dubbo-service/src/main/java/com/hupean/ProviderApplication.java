@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author hupan
- * @description
+ * @description dubbo服务启动前需要先运行zookeeper
  * @date 2022/5/15
  */
 @SpringBootApplication
