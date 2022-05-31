@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!-- 用于配置当前应用信息，不管该应用是提供者还是消费者 -->
+    <dubbo:application name="provider"/>
+    <!-- 用于配置连接注册中心相关信息,本例采用zookeeper作为注册中心 -->
+    <dubbo:registry protocol="zookeeper" address="zookeeper://127.0.0.1:2181" check="false"/>
+    <!-- 用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受 -->
+    <dubbo:protocol host="127.0.0.1" name="dubbo" port="1823"/>
+
+    <!-- 暴露服务，需要将接口定义和实现进行绑定暴露 -->
+    <!-- 001：用于暴露一个服务，定义服务的元信息。interface：服务接口名	 ref：服务接口实现的引用	 -->
+    <dubbo:service interface="com.hupean.service.UserService" ref="userServiceImpl"/>
+    <!-- 002：接口实现，即上述dubbo:service标签中的ref -->
+    <bean id="userServiceImpl" class="com.hupean.impl.UserServiceImpl"/>
+
+    <!--
+        dubbo官网：https://dubbo.apache.org/zh/
+        dubbo.xml配置可参考：https://blog.csdn.net/niugang0920/article/details/81975421
+    -->
+</beans>
